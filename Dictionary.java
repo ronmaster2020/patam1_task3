@@ -20,7 +20,7 @@ public class Dictionary {
                 // iterate over the file
                 while (data != -1) {
                     char ch = (char) data;
-                    if (ch < 'A' || (ch > 'Z' && ch < 'a') || ch > 'z') {
+                    if (ch == ' ' || ch == '\n' || ch == '\r' || ch == '\t') {
                         if (word.length() > 0) {
                             bloomFilter.add(word.toString());
                             word = new StringBuilder();

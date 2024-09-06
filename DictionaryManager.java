@@ -7,9 +7,11 @@ public class DictionaryManager {
     private Map<String, Dictionary> dictionaries  = new HashMap<>();
     private static DictionaryManager instance = null;
 
-    public boolean query(String word, String... args) {
+    public boolean query(String... args) {
+        String word = args[args.length - 1].replaceAll("[\r\n\t]", "");
         boolean result = false;
-        for (String book : args) {
+        for (int i = 0; i < args.length - 1; i++) {
+            String book = args[i];
             if (dictionaries.containsKey(book)) {
                 if (dictionaries.get(book).query(word)) {
                     result = true;
@@ -25,9 +27,11 @@ public class DictionaryManager {
         return result;
     }
 
-    public boolean challenge(String word, String... args) {
+    public boolean challenge(String... args) {
         boolean result = false;
-        for (String book : args) {
+        String word = args[args.length - 1].replaceAll("[\r\n\t]", "");
+        for (int i = 0; i < args.length - 1; i++) {
+            String book = args[i];
             if (dictionaries.containsKey(book)) {
                 if (dictionaries.get(book).challenge(word)) {
                     result = true;
